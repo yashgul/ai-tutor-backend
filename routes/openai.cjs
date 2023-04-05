@@ -69,7 +69,7 @@ router.post("/doubt", async function (req, res, next) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt,
-      max_tokens: 50,
+      max_tokens: 90,
     });
 
     console.log("\n\n", completion.data.choices[0].text);
@@ -79,6 +79,50 @@ router.post("/doubt", async function (req, res, next) {
       data: {
         question: doubt,
         answer: completion.data.choices[0].text,
+      },
+    });
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.status);
+      console.log(error.response.data);
+
+      const err = {
+        status: error.response.status,
+        data: error.response.data,
+      };
+      res.status(500).send({
+        error: err,
+      });
+    } else {
+      console.log(error.message);
+
+      const err = {
+        message: error.message,
+      };
+      res.status(500).send({
+        error: err,
+      });
+    }
+  }
+});
+
+router.post("/check", async function (req, res, next) {
+  const { topic, question, answer } = req.body;
+  const prompt = `With respect to ${topic} considering the question : ${question} is the answer: ${answer} correct or incorrect, answer in one word`;
+
+  try {
+    const completion = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: prompt,
+      max_tokens: 120,
+    });
+
+    console.log("\n\n", completion.data.choices[0].text);
+
+    return res.status(200).send({
+      message: "Successfully Completed",
+      data: {
+        answer_status: completion.data.choices[0].text,
       },
     });
   } catch (error) {

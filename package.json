@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yashgul/E-commerce-MERN-Backend.git"
+    "url": "git+https://github.com/yashgul/Convai-backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yashgul/E-commerce-MERN-Backend/issues"
+    "url": "https://github.com/yashgul/Convai-backend.git/issues"
   },
-  "homepage": "https://github.com/yashgul/E-commerce-MERN-Backend#readme",
+  "homepage": "https://github.com/yashgul/Convai-backend#readme",
   "dependencies": {
     "express": "^4.18.2",
     "nodemon": "^2.0.21",
