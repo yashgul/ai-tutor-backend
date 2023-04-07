@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const auth = require("./routes/auth.cjs");
+const course = require("./routes/course.cjs");
 const openai = require("./routes/openai.cjs");
 
 require("dotenv").config();
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use("/auth", auth);
+app.use("/course", course);
 app.use("/openai", openai);
 
 app.use((err, req, res, next) => {
